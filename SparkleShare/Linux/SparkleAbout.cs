@@ -29,11 +29,8 @@ namespace SparkleShare {
 
         public SparkleAbout () : base ("About SparkleShare")
         {
-            IconName       = "folder-sparkleshare";
             Resizable      = false;
             WindowPosition = WindowPosition.Center;
-
-            SetSizeRequest (600, 260);
 
 
             DeleteEvent += delegate (object o, DeleteEventArgs args) {
@@ -63,12 +60,30 @@ namespace SparkleShare {
             Controller.UpdateLabelEvent += delegate (string text) {
                 Application.Invoke (delegate {
                     this.updates.Text = text;
-                    this.updates.ShowAll();
+                    this.updates.ShowAll ();
                 });
             };
 
-
+            StyleWindow ();
             CreateAbout ();
+        }
+
+
+        private void StyleWindow ()
+        {
+            IconName = "folder-sparkleshare";
+            SetSizeRequest (600, 260);
+
+            CssProvider css_provider = new CssProvider ();
+            string image_path        = new string [] { SparkleUI.AssetsPath, "pixmaps", "about.png" }.Combine ();
+
+            css_provider.LoadFromData ("GtkWindow {" +
+                "  background-image:    url('" + image_path + "');" +
+                "  background-repeat:   no-repeat;" +
+                "  background-position: left bottom;" +
+                "}");
+            
+            StyleContext.AddProvider (css_provider, 800);
         }
 
 
@@ -82,17 +97,6 @@ namespace SparkleShare {
 
             Pango.FontDescription font = StyleContext.GetFont (StateFlags.Normal);
             font.Size = 9 * 1024;
-
-            CssProvider css_provider = new CssProvider ();
-            string image_path        = new string [] { SparkleUI.AssetsPath, "pixmaps", "about.png" }.Combine ();
-
-            css_provider.LoadFromData ("GtkWindow {" +
-                "background-image: url('" + image_path + "');" +
-                "background-repeat: no-repeat;" +
-                "background-position: left bottom;" +
-                "}");
-            
-            StyleContext.AddProvider (css_provider, 800);
 
             VBox layout_vertical = new VBox (false, 0);            
             HBox links_layout = new HBox (false, 16);
@@ -168,7 +172,7 @@ namespace SparkleShare {
         
         public SparkleLink (string text, string url)
         {
-            Markup = string.Format ("<a href=\"{0}\"><span fgcolor=\"#729fcf\">{1}</span></a>", url, text);	
+            Markup = string.Format ("<a href=\"{0}\"><span fgcolor=\"#729fcf\">{1}</span></a>", url, text);
             CanFocus = false;
 
             Pango.FontDescription font = StyleContext.GetFont (StateFlags.Normal);

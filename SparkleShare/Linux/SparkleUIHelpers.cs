@@ -26,9 +26,9 @@ namespace SparkleShare {
         {
             IconTheme icon_theme = new IconTheme ();
             icon_theme.AppendSearchPath (new string [] {SparkleUI.AssetsPath, "icons"}.Combine ());
-			
+
             foreach (string search_path in IconTheme.Default.SearchPath)
-               icon_theme.AppendSearchPath (search_path);	
+               icon_theme.AppendSearchPath (search_path);
 
             try {
                 return icon_theme.LoadIcon (name, size, IconLookupFlags.GenericFallback);

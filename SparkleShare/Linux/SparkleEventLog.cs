@@ -107,12 +107,12 @@ namespace SparkleShare {
                     Present ();
                 });
             };
-			
+            
             Controller.ShowSaveDialogEvent += delegate (string file_name, string target_folder_path) {
                 Application.Invoke (delegate {
                     FileChooserDialog dialog = new FileChooserDialog ("Restore from History", this,
                         FileChooserAction.Save, "Cancel", ResponseType.Cancel, "Save", ResponseType.Ok);
-					
+                    
                     dialog.CurrentName = file_name;
                     dialog.DoOverwriteConfirmation = true;
                     dialog.SetCurrentFolder (target_folder_path);
@@ -129,7 +129,7 @@ namespace SparkleShare {
             Controller.UpdateChooserEvent += delegate (string [] folders) {
                 Application.Invoke (delegate { UpdateChooser (folders); });
             };
-			
+            
             Controller.UpdateChooserEnablementEvent += delegate (bool enabled) {
                 Application.Invoke (delegate { this.combo_box.Sensitive = enabled; });
             };
@@ -255,7 +255,7 @@ namespace SparkleShare {
             html = html.Replace ("<!-- $small-font-size -->", "90%");
 
             html = html.Replace ("<!-- $pixmaps-path -->", pixmaps_path);
-			html = html.Replace ("<!-- $document-added-background-image -->", "file://" + new string [] {icons_path, "document-added.png"}.Combine ());
+            html = html.Replace ("<!-- $document-added-background-image -->", "file://" + new string [] {icons_path, "document-added.png"}.Combine ());
             html = html.Replace ("<!-- $document-edited-background-image -->", "file://" + new string [] {icons_path, "document-edited.png"}.Combine ());
             html = html.Replace ("<!-- $document-deleted-background-image -->", "file://" + new string [] {icons_path, "document-deleted.png"}.Combine ());
             html = html.Replace ("<!-- $document-moved-background-image -->", "file://" + new string [] {icons_path, "document-moved.png"}.Combine ());

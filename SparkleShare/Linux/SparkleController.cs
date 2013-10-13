@@ -122,19 +122,19 @@ namespace SparkleShare {
         // Creates the SparkleShare folder in the user's home folder
         public override bool CreateSparkleShareFolder ()
         {
-			bool folder_created = false;
-			
+            bool folder_created = false;
+            
             if (!Directory.Exists (SparkleConfig.DefaultConfig.FoldersPath)) {
-            	Directory.CreateDirectory (SparkleConfig.DefaultConfig.FoldersPath);
+                Directory.CreateDirectory (SparkleConfig.DefaultConfig.FoldersPath);
                 Syscall.chmod (SparkleConfig.DefaultConfig.FoldersPath, (FilePermissions) 448); // 448 -> 700
 
-				SparkleLogger.LogInfo ("Controller", "Created '" + SparkleConfig.DefaultConfig.FoldersPath + "'");
-				folder_created = true;
-			}
+                SparkleLogger.LogInfo ("Controller", "Created '" + SparkleConfig.DefaultConfig.FoldersPath + "'");
+                folder_created = true;
+            }
 
             string gvfs_command_path = new string [] { Path.VolumeSeparatorChar.ToString (),
-            	"usr", "bin", "gvfs-set-attribute" }.Combine ();
-			
+                "usr", "bin", "gvfs-set-attribute" }.Combine ();
+            
             // Add a special icon to the SparkleShare folder
             if (File.Exists (gvfs_command_path)) {
                 Process process = new Process ();
